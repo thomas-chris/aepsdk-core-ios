@@ -30,7 +30,10 @@ let package = Package(
     ],
     targets: [
         .target(name: "AEPCore",
-                dependencies: ["AEPServices", "AEPRulesEngine"],
+                dependencies: [
+                    "AEPServices",
+                    .product(name: "AEPRulesEngine", package: "AEPRulesEngine")
+                ],
                 path: "AEPCore/Sources"),
         .target(name: "AEPIdentity",
                 dependencies: ["AEPCore"],
