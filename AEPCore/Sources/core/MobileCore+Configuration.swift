@@ -47,6 +47,20 @@ public extension MobileCore {
                           data: [CoreConstants.Keys.UPDATE_CONFIG: configDict])
         MobileCore.dispatch(event: event)
     }
+    
+    static func getConfiguration(_ completion: @escaping ([String: Any]) -> Void) {
+        let event = Event(name: CoreConstants.EventNames.RETRIEVE_CONFIG_REQUEST, type: EventType.configuration, source: EventSource.requestContent, data: nil)
+        
+        EventHub.shared.registerResponseListener(triggerEvent: event, timeout: CoreConstants.API_TIMEOUT) { responseEvent in
+            guard let config = responseEvent?.data?[CoreConstants.Keys.RETRIEVE_CONFIG] as? [String: Any] else {
+                return completion([:])
+            }
+            completion(config)
+        }
+        
+        
+        MobileCore.dispatch(event: event)
+    }
 
     /// Clears the changes made by ``updateConfigurationWith(configDict:)`` and ``setPrivacyStatus(_:)`` to the initial configuration
     /// provided by either ``configureWith(appId:)`` or ``configureWith(filePath:)``

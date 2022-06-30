@@ -33,6 +33,7 @@ enum CoreConstants {
         static let SET_PUSH_IDENTIFIER = "SetPushIdentifier"
         static let SET_ADVERTISING_IDENTIFIER = "SetAdvertisingIdentifier"
         static let RESET_IDENTITIES_REQUEST = "Reset Identities Request"
+        static let RETRIEVE_CONFIG_REQUEST = "Retrieve Config Request"
     }
 
     enum Keys {
